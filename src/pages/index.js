@@ -12,18 +12,19 @@ export default ({ data }) => {
     <HeaderFooter class={navOpen && 'mobile-nav-open'}>
       <Helmet>
         <title>
-          Home | Emergence Design
+          Home
         </title>
         <meta name='description' content='Web Design and Development Agency for Growing Brands'></meta>
       </Helmet>
       <section className='work__case-studies'>
         <div className='work__list wrapper'>
-          {data.allWordpressWpJetpackPortfolio.edges.map(({ node }, index) => {
+          {data.allWordpressPost.edges.map(({ node }, index) => {
              const slug = `/case-study/${node.slug}`
              return (
                <article className='post__item' key={index}>
                  <Link to={slug}>
-                 <img style={{ backgroundImage: `url(${node.featured_media.source_url})` }} className='thumbnail' alt='' />
+                   {console.log(node)}
+                 <img style={{ backgroundImage: `url()` }} className='thumbnail' alt='' />
                  </Link>
                  <Link to={slug} className='h3 post__title'>
                  {node.title}
@@ -42,7 +43,7 @@ export default ({ data }) => {
 
 export const query = graphql`
 query {
-    allWordpressWpJetpackPortfolio {
+    allWordpressPost {
       edges {
         node {
           wordpress_id
@@ -50,7 +51,14 @@ query {
           title
           excerpt
           featured_media {
-            source_url
+            localFile {
+              childImageSharp {
+                fluid {
+                  srcSet
+                  src
+                }
+              }
+            }
           }
         }
       }

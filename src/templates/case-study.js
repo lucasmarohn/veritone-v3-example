@@ -12,10 +12,10 @@ import { graphql } from "gatsby"
 import {Helmet} from 'react-helmet'
 
 export default ({ data }) => {
-  const portfolio = data.wordpressWpJetpackPortfolio
+  const portfolio = data.wordpressPost
   const title = portfolio.title
   const acf = portfolio.acf
-  const sections = acf.content_sections_jetpack_portfolio
+  const sections = acf.content_sections_post
 
   const renderSection = (section, object) => {
     switch (section) {
@@ -43,9 +43,10 @@ export default ({ data }) => {
       </Helmet>
       <HeaderFooter>
       <main>
+        {console.log('image', acf.featured_image.localFile)}
         <FeaturedMedia
           featured={acf.background_image}
-          image={acf.featured_image.source_url}
+          image={acf.featured_image.localFile.childImageSharp.fluid.srcSet}
           mp4={acf.video_mp4 ? acf.video_mp4.source_url : false}
           webm={acf.video_webm ? acf.video_webm.source_url : false}
         />
@@ -72,27 +73,40 @@ export default ({ data }) => {
 //when querying data for a flexible content block there are a few things to remember. To access flexible content fields, instead of using their field name, you need to use [field_name]_[post_type] (if you have field named page_builder in your WordPress pages you would need to use page_builder_page). Once you do that everything will return in an array in the exact order they are in the ACF block.
 export const query = graphql`
   query($id: Int) {
-    wordpressWpJetpackPortfolio(wordpress_id: { eq: $id }) {
+    wordpressPost(wordpress_id: { eq: $id }) {
       title
       wordpress_id
       excerpt
       featured_media {
-        source_url
+        localFile {
+          childImageSharp {
+            fluid {
+              srcSet
+              src
+            } 
+          }
+        }
       }
       acf {
-        background_image {
-          source_url
-        }
         featured_image {
-          source_url
+          localFile {
+            childImageSharp {
+              fluid {
+                srcSet
+                src
+              } 
+            }
+          }
         }
         video_mp4 {
-          source_url
+          localFile {
+            relativePath
+          }
         }
         video_webm {
           source_url
         }
-        content_sections_jetpack_portfolio {
+        content_sections_post {
           ... on WordPressAcf_basic_text {
             __typename
             id
@@ -111,7 +125,14 @@ export const query = graphql`
                 source_url
               }
               col_image_content {
-                source_url
+                localFile {
+                  childImageSharp {
+                    fluid {
+                      srcSet
+                      src
+                    } 
+                  }
+                }
               }
               col_wysiwyg_content
             }
@@ -120,7 +141,14 @@ export const query = graphql`
             __typename
             id
             full_width_image {
-              source_url
+              localFile {
+                childImageSharp {
+                  fluid {
+                    srcSet
+                    src
+                  } 
+                }
+              }
               caption {
                 alt_text
               }

@@ -22,7 +22,7 @@ export default ({ featured = false, image = false, webm = "", mp4 = "" }) => {
             </video>
           </div>
         ) : (
-          <img id="js-scroll-featured-image" src={image} alt="" />
+          <img id="js-scroll-featured-image" srcset={image} alt="" />
         )}
       </div>
     </div>

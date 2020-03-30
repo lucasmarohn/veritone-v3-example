@@ -39,7 +39,7 @@ export default ({ navOpen, toggleNav, toggleContact }) => {
         <Link to='/' className='logo'>
         {data.site.siteMetadata.title}
         </Link>
-        <label id='mobile-hamburger-label' for='mobile-hamburger-checkbox'>
+        <label id='mobile-hamburger-label' htmlFor='mobile-hamburger-checkbox'>
           <img src={hamburger} alt='Toggle Menu' />
         </label>
         <input

@@ -31,13 +31,13 @@ export default ({ data }) => {
   }
 
   const renderVideoColumn = column => {
-    if (!column.col_video_mp4.source_url) {
+    if (!column.col_video_mp4.localFile.relativePath) {
       return column.col_video_content
     } else {
       return (
         <div class='video' style={{ '--aspect-ratio': `${column.col_aspect_ratio}%` }}>
           <video height={`${column.col_aspect_ratio}%`} width='100%' poster={column.col_video_cover}>
-            <source type='video/mp4' src={column && column.col_video_mp4.source_url} />
+            <source type='video/mp4' src={column && column.col_video_mp4.localFile.relativePath} />
           </video>
         </div>
       )
