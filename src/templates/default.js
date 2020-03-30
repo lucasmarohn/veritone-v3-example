@@ -3,6 +3,8 @@ import HeaderFooter from "../containers/HeaderFooter"
 import { Helmet } from 'react-helmet'
 import { graphql } from "gatsby"
 
+import Img from 'gatsby-image'
+
 export default ({ data }) => {
     const page = data.wordpressPage
   return (
@@ -11,7 +13,7 @@ export default ({ data }) => {
               <title>{page.title}</title>
           </Helmet>
         <HeaderFooter>
-            {page.featured_media && <div class='page__featured-image'><img src={page.featured_media.source_url} alt=""/></div>}
+            {page.featured_media && <Img fluid={page.featured_media.localFile.childImageSharp.fluid} alt=""/>}
             <section className="default-template">
                 <article className={'wrapper container-small'}>
                     <h2 class="headline">{page.title}</h2>
@@ -31,7 +33,13 @@ export const query = graphql`
       wordpress_id
       content
       featured_media {
-        source_url
+        localFile {
+          childImageSharp {
+            fluid {
+              ...GatsbyImageSharpFluid
+            }
+          }
+        }
       }
     }
   }

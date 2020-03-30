@@ -7,6 +7,8 @@ import Columns from "../components/section-columns"
 import Video from "../components/section-video"
 import FullWidthImage from "../components/section-full-image"
 
+import Img from 'gatsby-image'
+
 import { graphql } from "gatsby"
 
 import {Helmet} from 'react-helmet'
@@ -43,12 +45,11 @@ export default ({ data }) => {
       </Helmet>
       <HeaderFooter>
       <main>
-        {console.log('image', acf.featured_image.localFile)}
         <FeaturedMedia
-          featured={acf.background_image}
-          image={acf.featured_image.localFile.childImageSharp.fluid.srcSet}
-          mp4={acf.video_mp4 ? acf.video_mp4.source_url : false}
-          webm={acf.video_webm ? acf.video_webm.source_url : false}
+          featured={ !acf.video_poster ? portfolio.featured_media.localFile.childImageSharp.fluid.src : acf.video_poster }
+          image={portfolio.featured_media.localFile.childImageSharp.fluid.src}
+          mp4={acf.video_mp4 ? acf.video_mp4.localFile.publicURL : false}
+          webm={acf.video_webm ? acf.video_webm.localFile.publicURL : false}
         />
         <section>
           <div className="wrapper-container">
@@ -88,23 +89,24 @@ export const query = graphql`
         }
       }
       acf {
-        featured_image {
+        video_poster {
           localFile {
             childImageSharp {
               fluid {
-                srcSet
                 src
-              } 
+              }
             }
           }
         }
         video_mp4 {
           localFile {
-            relativePath
+            publicURL
           }
         }
         video_webm {
-          source_url
+          localFile {
+            publicURL
+          }
         }
         content_sections_post {
           ... on WordPressAcf_basic_text {
@@ -119,10 +121,19 @@ export const query = graphql`
               acf_fc_layout
               col_aspect_ratio
               col_video_cover {
-                source_url
+                localFile {
+                  childImageSharp {
+                    fluid {
+                      src
+                      srcSet
+                    }
+                  }
+                }
               }
               col_video_mp4 {
-                source_url
+                localFile {
+                  publicURL
+                }
               }
               col_image_content {
                 localFile {

@@ -59,7 +59,7 @@ export default ({ navOpen, toggleNav, toggleContact }) => {
                      key={index}
                      style={navOpen ? { transitionDelay: `${(index + 1) * 100}ms` } : null}>
                      {!contact ?
-                        <Link to={slug === 'emergence.design' ? `/` : slug}>
+                        <Link to={slug === 'staging.emergence.design' ? `/` : slug}>
                         {title}
                         </Link>
                         : <a href='#contact'>

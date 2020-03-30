@@ -1,4 +1,5 @@
 import React from 'react'
+import Img from 'gatsby-image'
 
 export default ({ data }) => {
   const columns = data.single_column
@@ -18,9 +19,10 @@ export default ({ data }) => {
 
   const renderImageColumn = column => {
     return (
-      <a href={column.col_image_content.source_url} data-fancybox='gallery'><img src={column.col_image_content.source_url} alt='' />
+      <>  
+        <img srcset={column.col_image_content.localFile.childImageSharp.fluid.srcSet} alt='' />
         <div className='image__caption'></div>
-      </a>
+      </>
     )
   }
 
@@ -31,13 +33,18 @@ export default ({ data }) => {
   }
 
   const renderVideoColumn = column => {
-    if (!column.col_video_mp4.localFile.relativePath) {
+    if (!column.col_video_mp4.localFile.publicURL) {
       return column.col_video_content
     } else {
       return (
         <div class='video' style={{ '--aspect-ratio': `${column.col_aspect_ratio}%` }}>
-          <video height={`${column.col_aspect_ratio}%`} width='100%' poster={column.col_video_cover}>
-            <source type='video/mp4' src={column && column.col_video_mp4.localFile.relativePath} />
+          <video
+            height={`${column.col_aspect_ratio}%`}
+            width='100%'
+            poster={column.col_video_cover}
+            autoplay='true'
+            muted='true'>
+            <source type='video/mp4' src={column.col_video_mp4 && column.col_video_mp4.localFile.publicURL} />
           </video>
         </div>
       )

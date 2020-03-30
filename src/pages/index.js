@@ -2,7 +2,7 @@ import React from 'react'
 import { Link, graphql } from 'gatsby'
 import HeaderFooter from '../containers/HeaderFooter'
 import { Helmet } from 'react-helmet'
-
+import Img from 'gatsby-image'
 import '../sass/index.sass'
 
 export default ({ data }) => {
@@ -23,8 +23,7 @@ export default ({ data }) => {
              return (
                <article className='post__item' key={index}>
                  <Link to={slug}>
-                   {console.log(node)}
-                 <img style={{ backgroundImage: `url()` }} className='thumbnail' alt='' />
+                 <Img fluid={node.featured_media.localFile.childImageSharp.fluid} alt={node.featured_media.alt_text} style={{height: 0, paddingBottom: '56.25%', borderRadius: '1.5rem'}} />
                  </Link>
                  <Link to={slug} className='h3 post__title'>
                  {node.title}
@@ -51,11 +50,12 @@ query {
           title
           excerpt
           featured_media {
+            alt_text
             localFile {
               childImageSharp {
                 fluid {
-                  srcSet
                   src
+                  srcSet
                 }
               }
             }
