@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Link, graphql } from 'gatsby'
 import HeaderFooter from '../containers/HeaderFooter'
 import { Helmet } from 'react-helmet'
@@ -6,7 +6,7 @@ import Img from 'gatsby-image'
 import '../sass/index.sass'
 
 export default ({ data }) => {
-  const [navOpen] = false
+  const [navOpen] = useState(false)
 
   return (
     <HeaderFooter class={navOpen && 'mobile-nav-open'}>
