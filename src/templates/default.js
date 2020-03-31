@@ -13,7 +13,7 @@ export default ({ data }) => {
               <title>{page.title}</title>
           </Helmet>
         <HeaderFooter>
-            {page.featured_media && <Img fluid={page.featured_media.localFile.childImageSharp.fluid} alt=""/>}
+            {( page.featured_media && page.featured_media.localFile ) && <Img fluid={page.featured_media.localFile.childImageSharp.fluid} alt=""/>}
             <section className="default-template">
                 <article className={'wrapper container-small'}>
                     <h2 class="headline">{page.title}</h2>
