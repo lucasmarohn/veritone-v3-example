@@ -33,7 +33,18 @@ module.exports = {
         searchAndReplaceContentUrls: {
           sourceUrl: 'https://staging.emergence.design',
           replacementUrl: 'https://localhost:8000'
-        }
+        },
+        includedRoutes: [
+          '**/categories',
+          '**/posts',
+          '**/pages',
+          '**/media',
+          '**/tags',
+          '**/taxonomies',
+          '**/users',
+          '**/menus',
+          '**/jetpack-portfolio'
+        ]
       }
     },
     `gatsby-transformer-sharp`,
