@@ -45,7 +45,7 @@ export default ({ data }) => {
       <>
         <FeaturedMedia
           featured={ !acf.video_poster.localFile ? (portfolio.featured_media.localFile ? portfolio.featured_media.localFile.childImageSharp.fluid : false) : acf.video_poster.localFile.childImageSharp.fluid }
-          image={portfolio.featured_media.localFile.childImageSharp.fluid}
+          image={portfolio.featured_media.localFile ? portfolio.featured_media.localFile.childImageSharp.fluid : false}
           mp4={acf.video_mp4 ? acf.video_mp4.localFile.publicURL : false}
           webm={acf.video_webm ? acf.video_webm.localFile.publicURL : false}
         />
