@@ -23,7 +23,7 @@ export default ({ data }) => {
              return (
                <article className='post__item' key={index}>
                  <Link to={slug}>
-                 <Img fluid={node.featured_media.localFile.childImageSharp.fluid} alt={node.featured_media.alt_text} style={{height: 0, paddingBottom: '56.25%', borderRadius: '1.5rem'}} />
+                 <Img fluid={node.featured_media.localFile ? node.featured_media.localFile.childImageSharp.fluid : ''} alt={node.featured_media.alt_text} style={{height: 0, paddingBottom: '56.25%', borderRadius: '1.5rem'}} />
                  </Link>
                  <Link to={slug} className='h3 post__title'>
                  {node.title}
