@@ -60,3 +60,46 @@ exports.createPages = async ({ graphql, actions }) => {
         })
     })
 }
+
+// // using Gatsby Type Builder API
+// exports.createSchemaCustomization = ({ actions, schema }) => {
+//   const { createTypes } = actions
+
+//   const imageConsts = {
+//     width: {
+//       type: 'String!',
+//       resolve(parent) {
+//         if (parent.width === false)
+//           return ''
+//         return parent.width.toString()
+//       }
+//     },
+//     height: {
+//       type: 'String!',
+//       resolve(parent) {
+//         if (parent.width === false)
+//           return ''
+//         return parent.height.toString()
+//       }
+//     }
+//   }
+//   const typeDefs = [
+//     schema.buildObjectType({
+//       name: 'wordpress__wp_media',
+//       fields: {
+//         media_details: {
+//           sizes: {
+//             thumbnail: imageConsts,
+//             medium_large: imageConsts,
+//             full: imageConsts,
+//           }
+//         }
+//       },
+//       interfaces: ['Node'],
+//       extensions: {
+//         infer: false,
+//       },
+//     }),
+//   ]
+//   createTypes(typeDefs)
+// }
