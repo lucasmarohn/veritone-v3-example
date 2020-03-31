@@ -6,7 +6,7 @@ exports.createPages = async ({ graphql, actions }) => {
 
     const portfolio = await graphql(`
     query {
-        allWordpressPost {
+        allWordpressWpJetpackPortfolio {
           edges {
             node {
               wordpress_id
@@ -18,7 +18,7 @@ exports.createPages = async ({ graphql, actions }) => {
     `)
     
     const portfolioTemplate = path.resolve('./src/templates/case-study.js')
-    portfolio.data.allWordpressPost.edges.forEach(edge => {
+    portfolio.data.allWordpressWpJetpackPortfolio.edges.forEach(edge => {
         createPage({
             // url of page
             path: `case-study/${edge.node.slug}`,

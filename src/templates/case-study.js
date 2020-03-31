@@ -12,24 +12,25 @@ import { graphql } from "gatsby"
 import {Helmet} from 'react-helmet'
 
 export default ({ data }) => {
-  const portfolio = data.wordpressPost
+  const portfolio = data.wordpressWpJetpackPortfolio
   const title = portfolio.title
   const acf = portfolio.acf
   const sections = acf.content_sections_post
 
   const renderSection = (section, object) => {
+    console.log(object)
     switch (section) {
       case "WordPressAcf_basic_text":
-        return <BasicText data={object} />
+        return <BasicText />
 
       case "WordPressAcf_columns":
-        return <Columns data={object} />
+        return <Columns />
 
       case "WordPressAcf_video":
-        return <Video data={object} />
+        return <Video />
 
       case "WordPressAcf_full_width_image":
-        return <FullWidthImage data={object} />
+        return <FullWidthImage />
       default:
         break
     }
@@ -44,10 +45,8 @@ export default ({ data }) => {
       <HeaderFooter>
       <>
         <FeaturedMedia
-          featured={ !acf.video_poster.localFile ? (portfolio.featured_media.localFile ? portfolio.featured_media.localFile.childImageSharp.fluid : false) : acf.video_poster.localFile.childImageSharp.fluid }
+          featured={ portfolio.featured_media.localFile.childImageSharp.fluid.src }
           image={portfolio.featured_media.localFile ? portfolio.featured_media.localFile.childImageSharp.fluid : false}
-          mp4={acf.video_mp4 && acf.video_mp4.localFile ? acf.video_mp4.localFile.publicURL : false}
-          webm={acf.video_webm && acf.video_webm.localFile ? acf.video_webm.localFile.publicURL : false}
         />
         <section>
           <div className="wrapper-container">
@@ -72,53 +71,34 @@ export default ({ data }) => {
 //when querying data for a flexible content block there are a few things to remember. To access flexible content fields, instead of using their field name, you need to use [field_name]_[post_type] (if you have field named page_builder in your WordPress pages you would need to use page_builder_page). Once you do that everything will return in an array in the exact order they are in the ACF block.
 export const query = graphql`
   query($id: Int) {
-    wordpressPost(wordpress_id: { eq: $id }) {
+    wordpressWpJetpackPortfolio(wordpress_id: {eq: $id}) {
       title
-      wordpress_id
-      excerpt
       featured_media {
         localFile {
           childImageSharp {
             fluid {
               srcSet
               src
-            } 
+            }
           }
         }
       }
       acf {
-        video_poster {
-          localFile {
-            childImageSharp {
-              fluid(maxWidth: 3000, quality: 100) {
-                src
-                srcSet
-              }
-            }
-          }
-        }
-        video_mp4 {
-          localFile {
-            publicURL
-          }
-        }
-        video_webm {
-          localFile {
-            publicURL
-          }
-        }
-        content_sections_post {
+        content_sections_jetpack_portfolio {
           ... on WordPressAcf_basic_text {
-            __typename
             id
             basic_text
           }
           ... on WordPressAcf_columns {
-            __typename
             id
             single_column {
               acf_fc_layout
-              col_aspect_ratio
+              col_wysiwyg_content
+              col_video_mp4 {
+                localFile {
+                  publicURL
+                }
+              }
               col_video_cover {
                 localFile {
                   childImageSharp {
@@ -129,38 +109,20 @@ export const query = graphql`
                   }
                 }
               }
-              col_video_mp4 {
-                localFile {
-                  publicURL
-                }
-              }
-              col_image_content {
-                localFile {
-                  childImageSharp {
-                    fluid {
-                      srcSet
-                      src
-                    } 
-                  }
-                }
-              }
-              col_wysiwyg_content
+              col_image_content
+              col_aspect_ratio
             }
           }
           ... on WordPressAcf_full_width_image {
-            __typename
             id
             full_width_image {
               localFile {
                 childImageSharp {
                   fluid {
-                    srcSet
                     src
-                  } 
+                    srcSet
+                  }
                 }
-              }
-              caption {
-                alt_text
               }
             }
           }
@@ -168,4 +130,5 @@ export const query = graphql`
       }
     }
   }
+  
 `

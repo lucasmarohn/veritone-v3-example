@@ -18,7 +18,7 @@ export default ({ data }) => {
       </Helmet>
       <section className='work__case-studies'>
         <div className='work__list wrapper'>
-          {data.allWordpressPost.edges.map(({ node }, index) => {
+          {data.allWordpressWpJetpackPortfolio.edges.map(({ node }, index) => {
              const slug = `/case-study/${node.slug}`
              return (
                <article className='post__item' key={index}>
@@ -41,8 +41,8 @@ export default ({ data }) => {
 }
 
 export const query = graphql`
-query {
-    allWordpressPost {
+  query {
+    allWordpressWpJetpackPortfolio {
       edges {
         node {
           wordpress_id
