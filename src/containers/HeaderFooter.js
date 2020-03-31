@@ -4,6 +4,7 @@ import Header from "../components/header"
 import ContactModal from "../components/contact-modal"
 import Footer from "../components/footer"
 
+import { withPrefix } from 'gatsby'
 import { Helmet } from "react-helmet"
 
 import favicon from "../img/icons/emergence-touch.png"
@@ -27,6 +28,8 @@ export default ({ children }) => {
         }}
       >
         <link rel="icon" type="image/png" href={favicon} />
+          <script src="https://services.cognitoforms.com/s/b5-uwuMqpUKsjg2buCjD1g" type="text/javascript" />
+        <script src={withPrefix('cognito.js')} type="text/javascript" />
       </Helmet>
       <Header
         toggleNav={handleNavOpen}
@@ -40,7 +43,7 @@ export default ({ children }) => {
         toggleContact={handleContactOpen}
         contactOpen={contactOpen}
       />
-      <Footer />
+        <Footer />
     </>
   )
 }

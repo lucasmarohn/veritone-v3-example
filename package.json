@@ -35,6 +35,7 @@
     "react": "^16.12.0",
     "react-dom": "^16.12.0",
     "react-helmet": "^5.2.1",
+    "react-keyboard-event-handler": "^1.5.4",
     "react-masonry-component": "^6.2.1",
     "react-photo-gallery": "^8.0.0",
     "simple-react-lightbox": "^2.5.4"

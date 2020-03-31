@@ -7,8 +7,6 @@ import Columns from "../components/section-columns"
 import Video from "../components/section-video"
 import FullWidthImage from "../components/section-full-image"
 
-import Img from 'gatsby-image'
-
 import { graphql } from "gatsby"
 
 import {Helmet} from 'react-helmet'
@@ -44,10 +42,10 @@ export default ({ data }) => {
         <meta name="description" content={portfolio.excerpt}></meta>
       </Helmet>
       <HeaderFooter>
-      <main>
+      <>
         <FeaturedMedia
-          featured={ !acf.video_poster ? portfolio.featured_media.localFile.childImageSharp.fluid.src : acf.video_poster }
-          image={portfolio.featured_media.localFile.childImageSharp.fluid.src}
+          featured={ !acf.video_poster.localFile ? portfolio.featured_media.localFile.childImageSharp.fluid : acf.video_poster.localFile.childImageSharp.fluid }
+          image={portfolio.featured_media.localFile.childImageSharp.fluid}
           mp4={acf.video_mp4 ? acf.video_mp4.localFile.publicURL : false}
           webm={acf.video_webm ? acf.video_webm.localFile.publicURL : false}
         />
@@ -65,7 +63,7 @@ export default ({ data }) => {
             </article>
           </div>
         </section>
-      </main>
+      </>
       </HeaderFooter>
     </>
   )
@@ -92,8 +90,9 @@ export const query = graphql`
         video_poster {
           localFile {
             childImageSharp {
-              fluid {
+              fluid(maxWidth: 3000, quality: 100) {
                 src
+                srcSet
               }
             }
           }

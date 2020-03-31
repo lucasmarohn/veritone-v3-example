@@ -1,5 +1,4 @@
 import React from 'react'
-import Img from 'gatsby-image'
 
 export default ({ data }) => {
   const columns = data.single_column
@@ -41,7 +40,8 @@ export default ({ data }) => {
           <video
             height={`${column.col_aspect_ratio}%`}
             width='100%'
-            poster={column.col_video_cover}
+            poster={column.col_video_cover.localFile ? column.col_video_cover.localFile.childImageSharp.fluid.src : ''}
+            loop
             autoplay='true'
             muted='true'>
             <source type='video/mp4' src={column.col_video_mp4 && column.col_video_mp4.localFile.publicURL} />
@@ -52,7 +52,7 @@ export default ({ data }) => {
   }
 
   return (
-    <div className='post__section wrapper columns'>
+    <div className={`post__section wrapper columns ${columns ? `cols-${columns.length}` : ''}`}>
       {columns && columns.map((col, index) => (
          <div className={`col__single col-${index}`}>
            {renderSingleColumn(col)}

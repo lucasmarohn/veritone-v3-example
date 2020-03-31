@@ -56,11 +56,12 @@
     text-decoration: none
     text-transform: lowercase
     font-family: "Space Grotesk Bold"
+    flex-shrink: 0
 
     +fluid-type($portrait, $desktop, 16px, 18px)
 
     &:hover
-        text-shadow: 0.1rem 0rem 0 #{$accent}, -0.1rem 0rem 0 #{adjust-hue($accent, 210)}
+        text-shadow: 0.1rem 0rem 0 #{$accent}
 
 .icon__social
     display: block
