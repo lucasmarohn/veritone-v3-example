@@ -12,7 +12,7 @@ export default ({ data }) => {
     <HeaderFooter class={navOpen && 'mobile-nav-open'}>
       <Helmet>
         <title>
-          Home
+          {data.wordpressSiteMetadata.title}
         </title>
         <meta name='description' content='Web Design and Development Agency for Growing Brands'></meta>
       </Helmet>
@@ -23,9 +23,9 @@ export default ({ data }) => {
              return (
                <article className='post__item' key={index}>
                  <Link to={slug}>
-                 <Img fluid={node.featured_media.localFile ? node.featured_media.localFile.childImageSharp.fluid : ''} alt={node.featured_media.alt_text} style={{height: 0, paddingBottom: '56.25%', borderRadius: '1.5rem'}} />
+                 <Img fluid={node.featured_media.localFile.childImageSharp.fluid} alt={node.featured_media.alt_text} style={{height: 0, paddingBottom: '56.25%', borderRadius: '1.5rem'}} />
                  </Link>
-                 <Link to={slug} className='h3 post__title'>
+                 <Link to={slug} className='h2 post__title'>
                  {node.title}
                  </Link>
                  <div to={slug} className='post__excerpt'>
@@ -40,8 +40,20 @@ export default ({ data }) => {
   )
 }
 
+export const wordpressMetaFragment = graphql`
+  fragment wordpressMeta on Query {
+    wordpressSiteMetadata {
+        name
+        url
+        description
+        home
+      }
+  }
+`
+
 export const query = graphql`
   query {
+    ...wordpressMeta
     allWordpressWpJetpackPortfolio {
       edges {
         node {

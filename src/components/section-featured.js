@@ -1,7 +1,8 @@
 import React from 'react'
 import Img from 'gatsby-image'
 
-export default ({ featured = false, image = false, webm, mp4 }) => {
+export default ({ featured, backup, webm, mp4 }) => {
+  console.log('featured image', featured, backup)
   return (
     <div className='featured-image-wrapper'>
       <div className='featured-image'>
@@ -21,7 +22,7 @@ export default ({ featured = false, image = false, webm, mp4 }) => {
            <Img
              id='js-scroll-featured-image'
              style={{ width: '100%', paddingBottom: '56.25%', height: '0'}}
-             fluid={!featured ? image : featured}
+             fluid={!featured ? backup : featured}
              alt='' />
            )}
       </div>

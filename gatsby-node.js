@@ -16,7 +16,7 @@ exports.createPages = async ({ graphql, actions }) => {
         }
       }
     `)
-    
+
     const portfolioTemplate = path.resolve('./src/templates/case-study.js')
     portfolio.data.allWordpressWpJetpackPortfolio.edges.forEach(edge => {
         createPage({
@@ -30,7 +30,7 @@ exports.createPages = async ({ graphql, actions }) => {
             }
         })
     })
-  
+
   const defaultPages = await graphql(`
     query {
       allWordpressPage {
@@ -45,7 +45,7 @@ exports.createPages = async ({ graphql, actions }) => {
       }
     }
     `)
-  
+
     const pageTemplate = path.resolve('./src/templates/default.js')
     defaultPages.data.allWordpressPage.edges.forEach(edge => {
         createPage({
@@ -59,6 +59,5 @@ exports.createPages = async ({ graphql, actions }) => {
             }
         })
     })
-
 
 }

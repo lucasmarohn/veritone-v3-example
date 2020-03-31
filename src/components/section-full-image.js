@@ -1,13 +1,17 @@
 import React from 'react'
 
-export default ({ data }) => {
-  console.log(data.full_width_image.localFile.childImageSharp)
+export default ({ image, caption }) => {
+  if (!image) {
+    return false
+  }
+
+  console.log(image.childImageSharp)
   return (
     <div className='post__section full-width-image'>
-      <img srcset={data.full_width_image.localFile.childImageSharp.fluid.srcSet} alt='' />
-      {data.full_width_image.caption ?
+      <img srcset={image.childImageSharp.fluid.srcSet} alt='' />
+      {caption ?
          <div class='image__caption'>
-           {data.full_width_image.caption.alt_text}
+           {caption}
          </div> : false}
     </div>
   )
