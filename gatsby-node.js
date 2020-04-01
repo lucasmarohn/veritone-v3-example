@@ -6,7 +6,7 @@ exports.createPages = async ({ graphql, actions }) => {
 
     const portfolio = await graphql(`
     query {
-        allWordpressWpJetpackPortfolio {
+        allWordpressWpProject {
           edges {
             node {
               wordpress_id
@@ -18,7 +18,7 @@ exports.createPages = async ({ graphql, actions }) => {
     `)
 
     const portfolioTemplate = path.resolve('./src/templates/case-study.js')
-    portfolio.data.allWordpressWpJetpackPortfolio.edges.forEach(edge => {
+    portfolio.data.allWordpressWpProject.edges.forEach(edge => {
         createPage({
             // url of page
             path: `case-study/${edge.node.slug}`,
@@ -59,6 +59,23 @@ exports.createPages = async ({ graphql, actions }) => {
             }
         })
     })
+}
+
+
+const {fmImagesToRelative} = require('gatsby-remark-relative-images')
+
+exports.onCreateNode = ({node, actions, getNode}) => {
+  const {createNodeField} = actions
+  fmImagesToRelative(node)
+
+  if (node.internal.type === `MarkdownRemark`) {
+    const value = createFilePath({node, getNode})
+    createNodeField({
+      name: `slug`,
+      node,
+      value,
+    })
+  }
 }
 
 // // using Gatsby Type Builder API

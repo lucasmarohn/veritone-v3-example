@@ -12,10 +12,10 @@ import { graphql } from "gatsby"
 import {Helmet} from 'react-helmet'
 
 export default ({ data }) => {
-  const portfolio = data.wordpressWpJetpackPortfolio
+  const portfolio = data.wordpressWpProject
   const title = portfolio.title
   const acf = portfolio.acf
-  const sections = acf.content_sections_jetpack_portfolio
+  const sections = acf.content_sections_project
 
   console.log(sections)
 
@@ -47,8 +47,9 @@ export default ({ data }) => {
       <HeaderFooter>
       <>
         <FeaturedMedia
-          featured={portfolio.featured_media.localFile.childImageSharp.fluid}
-          backup={portfolio.featured_media.localFile.childImageSharp.fluid}
+            featured={portfolio.acf.poster.localFile.childImageSharp.fluid}
+            backup={portfolio.featured_media.localFile.childImageSharp.fluid}
+            mp4={portfolio.acf.video_mp4.localFile.publicURL}
         />
         <section>
           <div className="wrapper-container">
@@ -70,13 +71,16 @@ export default ({ data }) => {
   )
 }
 
-
 //when querying data for a flexible content block there are a few things to remember. To access flexible content fields, instead of using their field name, you need to use [field_name]_[post_type] (if you have field named page_builder in your WordPress pages you would need to use page_builder_page). Once you do that everything will return in an array in the exact order they are in the ACF block.
 export const query = graphql`
   query($id: Int) {
-    wordpressWpJetpackPortfolio(wordpress_id: {eq: $id}) {
+    wordpressWpProject(wordpress_id: {eq: $id}) {
+
+
       title
       wordpress_id
+
+
       featured_media {
         localFile {
           childImageSharp {
@@ -86,18 +90,41 @@ export const query = graphql`
           }
         }
       }
+
+
       acf {
-        content_sections_jetpack_portfolio {
+        poster {
+          localFile {
+            childImageSharp {
+              fluid {
+                src
+                srcSet
+              }
+            }
+          }
+        }
+        video_mp4 {
+          id
+          localFile {
+            publicURL
+          }
+        }
+
+
+        content_sections_project {
+
           ... on WordPressAcf_basic_text {
             id
             basic_text
           }
+
           ... on WordPressAcf_columns {
             id
             single_column {
               acf_fc_layout
               col_wysiwyg_content
               col_video_mp4 {
+                id
                 localFile {
                   publicURL
                 }
@@ -123,6 +150,7 @@ export const query = graphql`
               col_aspect_ratio
             }
           }
+
           ... on WordPressAcf_full_width_image {
             id
             full_width_image {
@@ -135,6 +163,7 @@ export const query = graphql`
               }
             }
           }
+
         }
       }
     }

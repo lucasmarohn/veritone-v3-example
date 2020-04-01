@@ -21,7 +21,7 @@ export default ({ navOpen, toggleNav, toggleContact }) => {
             title
           }
         }
-        wordpressMenusMenusItems(slug: { eq: "header-menu" }) {
+        wordpressMenusMenusItems(slug: { eq: "header" }) {
           id
           slug
           items {

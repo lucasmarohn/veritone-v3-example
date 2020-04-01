@@ -7,7 +7,7 @@ export default ({ featured, backup, webm, mp4 }) => {
     <div className='featured-image-wrapper'>
       <div className='featured-image'>
         {webm || mp4 ? (
-           <div className='video' style={{ '--aspect-ratio': '56.25%' }} poster={featured}>
+           <div className='video' style={{ '--aspect-ratio': '56.25%' }} poster={featured.src}>
              <video
                height='56.25%'
                width='100%'
