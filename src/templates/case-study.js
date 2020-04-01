@@ -47,9 +47,9 @@ export default ({ data }) => {
       <HeaderFooter>
       <>
         <FeaturedMedia
-            featured={portfolio.acf.poster.localFile.childImageSharp.fluid}
-            backup={portfolio.featured_media.localFile.childImageSharp.fluid}
-            mp4={portfolio.acf.video_mp4.localFile.publicURL}
+            featured={portfolio.acf.poster && portfolio.acf.poster.localFile.childImageSharp.fluid}
+            backup={portfolio.featured_media && portfolio.featured_media.localFile.childImageSharp.fluid}
+            mp4={portfolio.acf.video_mp4 && portfolio.acf.video_mp4.localFile.publicURL}
         />
         <section>
           <div className="wrapper-container">
