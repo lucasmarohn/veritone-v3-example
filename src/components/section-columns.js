@@ -58,7 +58,7 @@ export default ({ columns }) => {
             height={`${column.col_aspect_ratio}%`}
             width="100%"
             poster={
-              column.col_video_cover.localFile
+              column.col_video_cover && column.col_video_cover.localFile
                 ? column.col_video_cover.localFile.childImageSharp.fluid.src
                 : ""
             }
