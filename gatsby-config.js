@@ -7,7 +7,7 @@
 module.exports = {
   /* Your site config here */
   siteMetadata: {
-    title: `Emergence Design`
+    title: `Veritone v3`
   },
   plugins: [
     {
@@ -24,7 +24,7 @@ module.exports = {
       resolve: 'gatsby-source-wordpress',
       options: {
         // I have created a dummy site for us to use with the plugins we discussed
-        baseUrl: 'staging.emergence.design',
+        baseUrl: 'veritone-wp-v3.mystic-engineering',
         protocol: 'https',
         hostingWPCOM: false,
         // We will be using some advanced custom fields
@@ -40,7 +40,7 @@ module.exports = {
         },
         keepMediaSizes: false,
         searchAndReplaceContentUrls: {
-          sourceUrl: 'https://staging.emergence.design',
+          sourceUrl: 'https://veritone-wp-v3.mystic-engineering',
           replacementUrl: 'https://localhost:8000'
         },
         includedRoutes: [
@@ -60,8 +60,8 @@ module.exports = {
     {
       resolve: `gatsby-plugin-manifest`,
       options: {
-        name: `Emergence Design`,
-        short_name: `Emergence Design`,
+        name: `Veritone Test Site`,
+        short_name: `Veritone Test Site`,
         start_url: `/`,
         background_color: `#0F0F0F`,
         theme_color: `#0F0F0F`,
