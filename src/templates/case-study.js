@@ -32,7 +32,7 @@ export default ({ data }) => {
         return <Video />
 
       case "WordPressAcf_full_width_image":
-        return <FullWidthImage />
+        return <FullWidthImage image={object.full_width_image}/>
       default:
         break
     }
