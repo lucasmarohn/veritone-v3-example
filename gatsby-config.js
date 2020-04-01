@@ -57,29 +57,29 @@ module.exports = {
       }
     },
     `gatsby-plugin-sass`,
-  // {
-  //   resolve: `gatsby-plugin-manifest`,
-  //   options: {
-  //     name: `Emergence Design`,
-  //     short_name: `Emergence Design`,
-  //     start_url: `/`,
-  //     background_color: `#0F0F0F`,
-  //     theme_color: `#0F0F0F`,
-  //     // Enables "Add to Homescreen" prompt and disables browser UI (including back button)
-  //     // see https://developers.google.com/web/fundamentals/web-app-manifest/#display
-  //     display: `standalone`,
-  //     icon: `src/img/icons/emergence-touch.png`, // This path is relative to the root of the site.
-  //     cache_busting_mode: 'none'
-  //   }
-  // },
-  // {
-  //   resolve: 'gatsby-plugin-offline',
-  //   options: {
-  //     workboxConfig: {
-  //       globPatterns: ['**/*']
-  //     }
-  //   }
-  // },
-  `gatsby-plugin-netlify`
+    {
+      resolve: `gatsby-plugin-manifest`,
+      options: {
+        name: `Emergence Design`,
+        short_name: `Emergence Design`,
+        start_url: `/`,
+        background_color: `#0F0F0F`,
+        theme_color: `#0F0F0F`,
+        // Enables "Add to Homescreen" prompt and disables browser UI (including back button)
+        // see https://developers.google.com/web/fundamentals/web-app-manifest/#display
+        display: `standalone`,
+        icon: `src/img/icons/emergence-touch.png`, // This path is relative to the root of the site.
+        cache_busting_mode: 'none'
+      }
+    },
+    {
+      resolve: 'gatsby-plugin-offline',
+      options: {
+        workboxConfig: {
+          globPatterns: ['**/*']
+        }
+      }
+    },
+    `gatsby-plugin-netlify`
   ]
 }
