@@ -27,7 +27,7 @@
     "gatsby-remark-images": "^3.2.1",
     "gatsby-remark-images-medium-zoom": "^1.4.0",
     "gatsby-remark-relative-images": "^0.3.0",
-    "gatsby-source-wordpress": "^3.2.3",
+    "gatsby-source-wordpress": "^4.0.8",
     "gatsby-transformer-remark": "^2.7.1",
     "gatsby-transformer-sharp": "^2.4.3",
     "lightbox-react": "^0.3.7",
